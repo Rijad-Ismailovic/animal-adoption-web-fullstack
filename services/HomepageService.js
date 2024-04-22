@@ -7,7 +7,7 @@ const HomepageService = {
     }
 
     $.ajax({
-      url: "get_animals.php",
+      url: "assets/json/animals.json",
       type: "GET",
       dataType: "json",
       success: function (data) {
