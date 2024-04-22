@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var app = $.spapp({
-    defaultView: "#homepage",
+    defaultView: "#login",
     templateDir : "./views/",
     pageNotFound : 'error_404'
   }); 
