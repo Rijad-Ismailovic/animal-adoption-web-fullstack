@@ -5,8 +5,8 @@
         }, 50);
 
         var buttonId;
-
         var activeAnimalObject;
+        
         function handlePageConditions() {
             // Hide header and footer in login and registration
             if (window.location.hash === "#login" || window.location.hash === "#registration") {
