@@ -1,3 +1,3 @@
 var Constants = {
-  API_BASE_URL: "http://localhost/web-project/backend/",
+  API_BASE_URL: "http://localhost/rikisansa/backend/",
 };

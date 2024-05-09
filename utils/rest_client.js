@@ -18,9 +18,11 @@ var RestClient = {
       data: data,
     })
       .done(function (response, status, jqXHR) {
+        console.log("done");
         if (callback) callback(response);
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("error");
         if (error_callback) {
           error_callback(jqXHR);
         } else {

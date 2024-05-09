@@ -1,121 +1,92 @@
-<div class="container mt-5">
-  <div id="registrationHeader" class="row align-items-center mb-5">
-    <div class="col-md-6 col-lg-5 d-flex justify-content-end">
-      <img src="assets/media/logos/logo.png" width="150" class="mr-5" />
-    </div>
-    <div class="col-md-6 col-lg-7 text-left text-white">
+<div class="container py-4 px-4 px-lg-5 my-1 text-center">
+  <!-- Added 'text-center' class here -->
+  <div class="row align-items-center">
+    <div class="col-md-12 col-lg-12 text-white">
       <h1 class="display-4 fw-bolder">udomi.ba</h1>
     </div>
   </div>
+</div>
+
+<div class="container mt-2">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-6">
-      <form id="registrationForm" method="post">
-        <div class="card px-5 py-4" ->
-          <h2 class="mb-4 text-center text-black">Register</h2>
-          <div class="form-data row" v-if="!submitted">
-            <div class="forms-inputs mb-4 col-6">
-              <span>Ime</span>
+    <div class="col-md-5">
+      <form id="registration_form" method="POST">
+        <div class="card px-5 py-4" id="form1">
+          <h2 class="mb-4 text-center text-black">Registration</h2>
+          <div class="form-data">
+            <div class="forms-inputs mb-4">
+              <span>Username</span>
               <input
-                id="name"
-                name="name"
                 autocomplete="off"
                 type="text"
-                v-model="email"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}"
-                v-on:blur="emailBlured = true"
-                style="width: 100%"
+                class="form-control"
+                id="username"
+                name="username"
               />
-              <div class="invalid-feedback">A valid email is required!</div>
-            </div>
-            <div class="forms-inputs mb-4 col-6">
-              <span>Prezime</span>
-              <input
-                id="surname"
-                name="surname"
-                autocomplete="off"
-                type="text"
-                v-model="email"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}"
-                v-on:blur="emailBlured = true"
-                style="width: 100%"
-              />
-              <div class="invalid-feedback">A valid email is required!</div>
             </div>
             <div class="forms-inputs mb-4">
               <span>Email</span>
               <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
                 id="email"
                 name="email"
-                autocomplete="off"
-                type="text"
-                v-model="email"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}"
-                v-on:blur="passwordBlured = true"
-                style="width: 100%"
               />
-              <div class="invalid-feedback">A valid Email is required!</div>
             </div>
             <div class="forms-inputs mb-4">
-              <span>Username</span>
+              <span>Name</span>
               <input
-                id="username"
-                name="username"
                 autocomplete="off"
                 type="text"
-                v-model="email"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}"
-                v-on:blur="passwordBlured = true"
-                style="width: 100%"
+                class="form-control"
+                id="name"
+                name="name"
               />
-              <div class="invalid-feedback">A valid Username is required!</div>
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Surname</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="surname"
+                name="surname"
+              />
             </div>
             <div class="forms-inputs mb-4">
               <span>Password</span>
               <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
                 id="password"
                 name="password"
-                xautocomplete="off"
-                type="password"
-                v-model="password"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}"
-                v-on:blur="passwordBlured = true"
-                style="width: 100%"
               />
-              <div class="invalid-feedback">Password must be 8 characters!</div>
             </div>
-            <div class="row mb-4">
-              <div class="forms-inputs mb-4">
-              <span>Repeat Password</span>
+            <div class="forms-inputs mb-4">
+              <span>Repeat password</span>
               <input
-                id="repeatPassword"
-                name="repeatPassword"
-                xautocomplete="off"
+                autocomplete="off"
                 type="password"
-                v-model="password"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}"
-                v-on:blur="passwordBlured = true"
-                style="width: 100%"
+                class="form-control"
+                id="repeat_password"
+                name="repeat_password"
               />
-              <div class="invalid-feedback">Password must be 8 characters!</div>
             </div>
-            </div>
-            <div class="mb-3 col-12">
+            <div class="mb-3">
               <button
-                id="registrationButton"
-                class="btn btn-dark w-100"
-                style="height: 50px"
                 type="submit"
+                class="btn btn-dark w-100"
+                form="registration_form"
               >
                 Register
               </button>
             </div>
             <div class="text-center">
-              <a class="small" href="#login">Already Have an Account</a>
+              <a class="small" href="#login">Login</a>
             </div>
           </div>
-          <!--<div class="success-data" v-else>
-                    <div class="text-center d-flex flex-column"> <i class='bx bxs-badge-check'></i> <span class="text-center fs-1">You have been logged in <br> Successfully</span> </div>
-                </div>-->
         </div>
       </form>
     </div>

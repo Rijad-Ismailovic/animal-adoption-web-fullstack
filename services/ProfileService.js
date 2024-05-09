@@ -1,76 +1,145 @@
 const ProfileService = {
   init: function () {
-    let desiredUserId = localStorage.getItem("userId");
-        let userId = parseInt(desiredUserId);
-    $.ajax({
-      url: "assets/json/users.json",
-      type: "GET",
-      dataType: "json",
-      success: function (data) {
-        data.forEach(function (user, index) {
-          if (index == userId) {
-            $("#username").text(user.username);
-            $("#name").text(user.name + " " + user.surname);
-            $("#email").text(user.email);
-          }
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error("Error fetching data from file:", error);
-      },
-    });
+    let id = localStorage.getItem("user_id");
+    this.loadUserData(id);
+    this.loadAnimals(id);
 
-   $.ajax({
-     url: "assets/json/animals.json",
-     type: "GET",
-     dataType: "json",
-     success: function (data) {
-       let $animalCardsContainer = $("#animal-cards-container");
-
-       data.forEach(function (animal, index) {
-         if (animal.userId == userId) {
-           console.log("radi");
-           if (index % 4 === 0) {
-             $animalCardsContainer.append(
-               '<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>'
-             );
-           }
-
-           let cardHtml = ProfileService.createCard(animal);
-
-           $animalCardsContainer.find(".row:last-child").append(cardHtml);
-
-           if ((index + 1) % 4 === 0 || index + 1 === data.length) {
-             // Closing the rows
-             $animalCardsContainer.append("</div>");
-           }
-         }
-       });
-     },
-     error: function (xhr, status, error) {
-       console.error("Error fetching data from file:", error);
-     },
-   });
+    this.validate();
   },
-  createCard: (animal) => {
-    return (cardHtml = `
-            <div class="col mb-5">
-              <div class="card h-100">
-                <img class="card-img-top" src="${animal.imagePath}" alt="..." />
-                <div class="card-body p-3">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">${animal.listingName}</h5>
-                    ${animal.breed}<br>
-                    ${animal.age} ${animal.ageUnit} / ${animal.weight} ${animal.weightUnit}
-                  </div>
-                </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center"><a class="btn cardbtn-outline-dark mt-auto" href="?id=${animal.id}#itemPage">View</a></div>
+
+  loadUserData: function (id) {
+    RestClient.get("users/id/" + id, function (data) {
+      $("#nameSurname").text(data.name + " " + data.surname);
+      $("#username").text(data.username);
+      $("#email").text(data.email);
+    });
+  },
+
+  loadAnimals: function (id) {
+    RestClient.get("animals/json/json", function (data) {
+      let $animalCardsRow = $("#animal-cards-row");
+      data.forEach(function (animal) {
+        if (animal.user_id == id) {
+          ProfileService.createCard(animal).appendTo($animalCardsRow);
+        }
+      });
+    });
+  },
+
+  createCard: function (animal) {
+    let badgeColor = animal.gender === "male" ? "bg-blue" : "bg-pink";
+    let imagePath =
+      animal.image_path != null
+        ? animal.image_path
+        : "https://dummyimage.com/450x300/dee2e6/6c757d.jpg";
+    let cardHtml = `
+      <div class="col mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" src="${imagePath}" alt="..." />
+          <div class="card-body p-3 position-relative">
+            <div class="badge badge-pill ${badgeColor} position-absolute" style="top: 0.6rem; right: 0.6rem">‎ ‎ </div>
+            <div class="text-center">
+              <h5 class="fw-bolder">${animal.listing_title}</h5>
+              ${animal.breed}<br>
+              ${animal.age} years / ${animal.weight} kg
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="row mb-2">
+              <div class="col text-center">
+                <div class="d-grid gap-2">
+                  <a class="btn btn-outline-dark" href="?id=${animal.id}#itempage">View</a>
                 </div>
               </div>
             </div>
-          `);
+          </div>
+        </div>
+      </div>
+    `;
+    return $(cardHtml);
   },
 
-  
+  validate: function () {
+    $.validator.setDefaults({
+      errorClass: "error",
+      errorElement: "label",
+      errorPlacement: function (error, element) {
+        error.css("color", "red");
+        error.insertAfter(element);
+      },
+    });
+
+    FormValidation.validate(
+      "#add_listing_form",
+      {
+        listing_title: {
+          required: true,
+        },
+        location: {
+          required: true,
+        },
+        name: {
+          required: true, // Inace ne bi bio required, ali ako se ne unese name field zbog nekog razloga se ne moze fetchat iz baze ??
+        },
+        type: {
+          required: true,
+        },
+        age: {
+          digits: true,
+        },
+        weight: {
+          digits: true,
+        },
+        gender: {
+          required: true,
+        },
+      },
+      {
+        listing_title: {
+          required: "Field is required",
+        },
+        name: {
+          required: "Field is required",
+        },
+        location: {
+          required: "Field is required",
+        },
+        type: {
+          required: "Field is required",
+        },
+        age: {
+          digits: "Input must be number",
+        },
+        weight: {
+          digits: "Input must be number",
+        },
+        gender: {
+          required: "Field is required",
+        },
+      },
+      function (data) {
+        Utils.block_ui("#add_listing_modal");
+
+        data["user_id"] = localStorage.getItem("user_id");
+
+        //url, data, callback, error_callback
+        RestClient.post(
+          "animals/add",
+          data,
+          function (response) {
+            console.log("tu sam");
+            Utils.unblock_ui("#add_listing_modal");
+            $("#add_listing_modal").modal("toggle");
+            AdminService.reload_animals_datatable();
+          },
+          function (error) {
+            console.log(error);
+
+            toastr.error("Error creating the listing");
+            Utils.unblock_ui("#add_listing_modal");
+          }
+        );
+      }
+    );
+  },
 };

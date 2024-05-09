@@ -1,81 +1,60 @@
-<div class="container-fluid vh-100">
-  <div class="row h-100">
-    <div class="col-sm-3 p-5 bg-main text-white"></div>
-    <div class="col-sm-6 p-5 bg-white text-black">
-      <div class="row p-3">
-        <div class="col-sm-6">
-          <div class="d-flex flex-column h-100">
-            <div class="mb-auto">
-              <p
-                id="username"
-                class="lead fw-bold text-center"
-                style="font-size: 30px"
-              ></p>
-              <p id="name" class="text-center mb-1"></p>
-              <p id="email" class="text-center mb-1"></p>
-              <!-- <p class="text-center">Broj oglasa: 1</p> -->
-            </div>
-            <div class="mt-auto">
-              <button class="btn btn-outline-dark" type="button">
-                <b>EDIT</b>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 d-flex align-items-center justify-content-center">
+<!-- Header-->
+<header class="py-2 bg-primary">
+  <div class="text-center my-5">
+    <img
+      class="img-fluid rounded-circle mb-4"
+      src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg"
+      alt="..."
+    />
+    <h1 class="text-white fs-3 fw-bolder" id="nameSurname">name surname</h1>
+    <p class="text-white-50 mb-0" id="username">username</p>
+    <p class="text-white-50 mb-0" id="email">email</p>
+  </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div
+      id="animal-cards-row"
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+    >
+      <div class="col mb-5">
+        <div class="card h-100">
           <img
-            src="assets/media/images/profile/blank.png"
-            class="rounded-circle img-fluid"
-            style="width: 220px; height: 220px"
+            class="card-img-top"
+            src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+            alt="..."
           />
-        </div>
-      </div>
-      <hr class="hr" />
-      <div id="animal-cards-container" class="container px-4 px-lg-5 mt-5">
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- Product image-->
-            <button
-              type="button"
-              class="btn btn-custom w-100 h-100"
+          <div
+            class="card-body d-flex align-items-center justify-content-center p-3 position-relative"
+          >
+            <a
+              class="btn btn-outline-dark btn-lg btn-block"
+              data-bs-target="#add_listing_modal"
               data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
               data-bs-whatever="@getbootstrap"
+              >Add listing</a
             >
-              <b>Add animal</b>
-            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-3 p-5 bg-main text-dark"></div>
   </div>
-</div>
+</section>
 
-<!-- form -->
-
-<!-- <button
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
-  data-bs-whatever="@getbootstrap"
->
-  Open modal for @getbootstrap
-</button> -->
-
+<!-- Add Listing Modal -->
 <div
   class="modal fade"
-  id="exampleModal"
+  id="add_listing_modal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="addListingLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="add-animal-form">
+      <form id="add_listing_form">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add animal</h5>
+          <h5 class="modal-title" id="addListingLabel">Add Animal Listing</h5>
           <button
             type="button"
             class="btn-close"
@@ -84,6 +63,11 @@
           ></button>
         </div>
         <div class="modal-body">
+          <input
+              type="hidden"
+              id="id"
+              name="id"
+            />
           <div class="mb-3">
             <label for="listing-title" class="col-form-label"
               >Listing Title:</label
@@ -92,32 +76,61 @@
               type="text"
               class="form-control"
               id="listing_title"
-              name="listingName"
+              name="listing_title"
             />
           </div>
-          <div class="mb-3">
-            <label for="animal-name" class="col-form-label">Animal Name:</label>
-            <input type="text" class="form-control" id="name" name="name" />
+          <div class="row mb-3">
+            <div class="col">
+              <label for="location" class="col-form-label">Location:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="location"
+                name="location"
+              />
+            </div>
+            <div class="col">
+              <label for="animal-name" class="col-form-label"
+                >Animal Name:</label
+              >
+              <input type="text" class="form-control" id="name" name="name" />
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="animal-type" class="col-form-label">Animal Type:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="type"
-              name="animalType"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="animal-breed" class="col-form-label"
-              >Animal Breed:</label
-            >
-            <input type="text" class="form-control" id="breed" name="breed" />
+          <div class="row mb-3">
+            <div class="col">
+              <label for="animal-type" class="col-form-label"
+                >Animal Type:</label
+              >
+              <select class="form-select" id="type" name="type">
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="rabbit">Rabbit</option>
+                <option value="rabbit">Hamster</option>
+                <option value="rabbit">Guinea pig</option>
+                <option value="rabbit">Fish</option>
+                <option value="rabbit">Bird</option>
+                <option value="rabbit">Lizard</option>
+                <option value="rabbit">Snake</option>
+                <option value="rabbit">Other</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="animal-breed" class="col-form-label"
+                >Animal Breed:</label
+              >
+              <input type="text" class="form-control" id="breed" name="breed" />
+            </div>
           </div>
           <div class="row mb-3">
             <div class="col">
               <label for="animal-age" class="col-form-label">Animal Age:</label>
-              <input type="text" class="form-control" id="age" name="age" />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="years"
+                id="age"
+                name="age"
+              />
             </div>
             <div class="col">
               <label for="animal-weight" class="col-form-label"
@@ -126,46 +139,10 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="kg"
                 id="weight"
                 name="weight"
               />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="location" class="col-form-label">Location:</label>
-            <!-- Assuming a regular text field for location -->
-            <input
-              type="text"
-              class="form-control"
-              id="location"
-              name="location"
-            />
-            <!-- Alternatively, you can replace the text field with a dropdown of Bosnian and Herzegowinian cities -->
-          </div>
-          <div class="row mb-3">
-            <div class="col">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="vaccinated"
-                  name="vaccinated"
-                />
-                <label class="form-check-label" for="vaccinated"
-                  >Vaccinated</label
-                >
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="chipped"
-                  name="chipped"
-                />
-                <label class="form-check-label" for="chipped">Chipped</label>
-              </div>
             </div>
           </div>
           <div class="row mb-3">
@@ -206,15 +183,43 @@
               </div>
             </div>
           </div>
-          <div class="mb-3">
-            <label for="additional-details" class="col-form-label"
-              >Additional Details:</label
-            >
-            <textarea
-              class="form-control"
-              id="additional_details"
-              name="additionalDetails"
-            ></textarea>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="vaccinated"
+                  name="vaccinated"
+                />
+                <label class="form-check-label" for="vaccinated"
+                  >Vaccinated</label
+                >
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="chipped"
+                  name="chipped"
+                />
+                <label class="form-check-label" for="chipped">Chipped</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="additional-details" class="col-form-label"
+                >Additional Information:</label
+              >
+              <textarea
+                class="form-control"
+                id="additional_info"
+                name="additional_info"
+              ></textarea>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -225,52 +230,49 @@
           >
             Close
           </button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" form="add_listing_form">
+            Submit
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
+<!-- Delete Modal -->
+<div
+  class="modal fade"
+  id="delete_modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Potvrda</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">
+        Da li ste sigurni da želite ukloniti ovaj artikal?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="./services/ProfileService.js"></script>
+<script src="./services/AdminService.js"></script>
 <script>
   ProfileService.init();
-  FormValidation.validate(
-    "#add-animal-form",
-    {
-      listingName: {
-        required: true,
-      },
-      animalType: {
-        required: true,
-      },
-    },
-    {
-      listingName: {
-        required: "Listing name is required",
-      },
-      animalType: {
-        required: "Animal type is required",
-      },
-    },
-    function (data) {
-      //zbog nekog razloga ne smijem promjeniti id od modal-a, neki error sa backdropom
-      Utils.block_ui("#exampleModal");
-      data["userId"] = localStorage.getItem("userId"); //ovjde konverzija u int ne radi
-      console.log(data);
-
-      //url, data, callback, error_callback
-      RestClient.post(
-        "add_animal.php",
-        data,
-        function (response) {
-          Utils.unblock_ui("#exampleModal");
-          $("#exampleModal").modal("toggle");
-        },
-        function (error) {
-          toastr.error(error);
-        }
-      );
-    }
-  );
 </script>

@@ -1,25 +1,16 @@
-<!-- Product section-->
-<section class="py-4">
+<section class="py-">
   <div class="container px-4 px-lg-5 my-5">
     <div class="row gx-4 gx-lg-5 align-items-center">
       <div class="col-md-6">
-        <img
-          id="picture"
-          class="card-img-top mb-3 mb-md-0"
-          src="assets/media/images/homepageCardImages/auraCard.jpg"
-          alt="..."
-        />
+        <img class="card-img-top mb-5 mb-md-0" src="" alt="..." id="image" />
       </div>
+
       <div class="col-md-6">
-        <h1 id="#listingName" class="display-5 fw-bolder">AURA</h1>
-        <a
-          href="profile.html"
-          class="fs-5 mb-2"
-          style="text-decoration: none; color: inherit"
-        >
-          <span id="username"></span>
-        </a>
+        <div class="small" id="username">username</div>
+        <h1 class="display-5 fw-bolder" id="listing_name">listing_name</h1>
+
         <hr class="hr" />
+
         <div class="lead">
           <b>Ime:</b> <span id="name"></span><br />
           <b>Pasmina:</b> <span id="breed"></span><br />
@@ -28,141 +19,72 @@
           <b>Lokacija:</b> <span id="location"></span><br />
           <b>Vakcinisan:</b> <span id="vaccinated"></span><br />
           <b>Cipovan:</b> <span id="chipped"></span>
-          <hr class="hr" />
         </div>
-        <p id="additionalDetails" class="lead"></p>
+
+        <hr class="hr" />
+
+        <p class="lead" id="additional_info"></p>
         <div class="d-flex">
-          <a
-            href="https://www.instagram.com/"
-            class="btn btn-outline-dark flex-shrink-0"
-            role="button"
-            target="_blank"
-          >
-            <i class="bi-house-fill me-1"></i>
-            <b>UDOMI</b>
-          </a>
+          <div class="col">
+            <a
+              class="btn btn-outline-dark w-100"
+              role="button"
+              data-bs-toggle="modal"
+              data-bs-target="#udomi_modal"
+            >
+              <i class="bi-house-fill me-1"></i>
+              <b>UDOMI</b>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <hr class="hr" />
 </section>
-<!-- Related items section-->
-<section class="py-0 bg-light">
+
+<!-- Slicni oglasi-->
+<section class="bg-light">
   <div class="container px-4 px-lg-5 mt-5">
-    <hr class="hr" />
-    <h2 class="fw-bolder mb-4">Preporuceni oglasi</h2>
+    <h2 class="fw-bolder mb-4">Slicni oglasi</h2>
     <div
+      id="simillar_articles_row"
       class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-    >
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Product image-->
-          <img
-            class="card-img-top"
-            src="assets/media/images/homepageCardImages/labrador.jpg"
-            alt="..."
-          />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Kala</h5>
-              <!-- Product additional info-->
-              Labrador<br />
-              5 godina / 35kg
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center">
-              <a class="btn cardbtn-outline-dark mt-auto" href="#">View</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Product image-->
-          <img
-            class="card-img-top"
-            src="assets/media/images/homepageCardImages/pug.jpg"
-            alt="..."
-          />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Edgar</h5>
-              <!-- Product additional info-->
-              Tops<br />
-              4 godine / 1.5kg
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center">
-              <a class="btn cardbtn-outline-dark mt-auto" href="#">View</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Product image-->
-          <img
-            class="card-img-top"
-            src="assets/media/images/homepageCardImages/zlatniretriver.jpg"
-            alt="..."
-          />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Cookie</h5>
-              <!-- Product additional info-->
-              Zlatni retriver<br />
-              11 godina / 33kg
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center">
-              <a class="btn cardbtn-outline-dark mt-auto" href="#">View</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Product image-->
-          <img
-            class="card-img-top"
-            src="assets/media/images/homepageCardImages/rotveiler.jpeg"
-            alt="..."
-          />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Roti</h5>
-              <!-- Product additional info-->
-              Rotvajler<br />
-              3 godine / 37kg
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center">
-              <a class="btn cardbtn-outline-dark mt-auto" href="#">View</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    ></div>
   </div>
 </section>
 
-<script src="./services/ItemPageService.js"></script>
+<!-- Udomi Modal -->
+<div
+  class="modal fade"
+  id="udomi_modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Potvrda</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">Da li ste sigurni da želite udomiti?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Udomi!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./services/ItempageService.js"></script>
 <script>
-  ItemPageService.init();
+  ItempageService.init();
 </script>

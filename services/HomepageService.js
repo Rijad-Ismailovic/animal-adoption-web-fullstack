@@ -1,58 +1,52 @@
 const HomepageService = {
   init: function () {
-    for (let i = 0; i < localStorage.length; i++) { // Display contents of local storage
-      const key = localStorage.key(i);
-      const value = localStorage.getItem(key);
-      console.log(`${key}: ${value}`);
-    }
+    $("body").removeClass("bg-dark").addClass("bg-light");
+    $("footer").show();
+    $("nav").show();
 
-    $.ajax({
-      url: "assets/json/animals.json",
-      type: "GET",
-      dataType: "json",
-      success: function (data) {
-        let $animalCardsContainer = $("#animal-cards-container");
+    this.loadAnimals();
+  },
 
-        data.forEach(function (animal, index) {
-          if (index % 4 === 0) {
-            $animalCardsContainer.append(
-              '<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>'
-            );
-          }
-
-          HomepageService.createCard(animal);
-
-          $animalCardsContainer.find(".row:last-child").append(cardHtml);
-
-          if ((index + 1) % 4 === 0 || index + 1 === data.length) {
-            // Closing the rows
-            $animalCardsContainer.append("</div>");
-          }
-        });
-
-      },
-      error: function (xhr, status, error) {
-        console.error("Error fetching data from file:", error);
-      },
+  loadAnimals: function () {
+    RestClient.get("animals/json/json", function (data) {
+      console.log("Data je " + data);
+      let $animalCardsRow = $("#animal-cards-row");
+      data.forEach(function (animal) {
+        HomepageService.createCard(animal).appendTo($animalCardsRow);
+      });
     });
   },
-  createCard: (animal) => {
-    return (cardHtml = `
-            <div class="col mb-5">
-              <div class="card h-100">
-                <img class="card-img-top" src="${animal.imagePath}" alt="..." />
-                <div class="card-body p-3">
-                  <div class="text-center">
-                    <h5 class="fw-bolder">${animal.listingName}</h5>
-                    ${animal.breed}<br>
-                    ${animal.age} ${animal.ageUnit} / ${animal.weight} ${animal.weightUnit}
-                  </div>
-                </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center"><a class="btn cardbtn-outline-dark mt-auto" href="?id=${animal.id}#itemPage">View</a></div>
-                </div>
+
+//<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+
+  createCard: function (animal) {
+    let imagePath =
+      animal.image_path != null
+        ? animal.image_path
+        : "https://dummyimage.com/450x300/dee2e6/6c757d.jpg"; 
+    let badgeColor = animal.gender === "male" ? "bg-blue" : "bg-pink";
+    let cardHtml = `
+      <div class="col mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" src="${imagePath}" alt="..." />
+          <div class="card-body p-3 position-relative">
+            <div class="badge badge-pill ${badgeColor} position-absolute" style="top: 0.6rem; right: 0.6rem">‎ ‎ </div>
+            <div class="text-center">
+              <h5 class="fw-bolder">${animal.listing_title}</h5>
+              ${animal.breed}<br>
+              ${animal.age} years / ${animal.weight} kg
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <div class="d-grid gap-2">
+                <a class="btn btn-outline-dark mt-auto" href="?id=${animal.id}#itempage">View</a>
               </div>
             </div>
-          `);
+          </div>
+        </div>
+      </div>
+    `;
+    return $(cardHtml);
   },
 };

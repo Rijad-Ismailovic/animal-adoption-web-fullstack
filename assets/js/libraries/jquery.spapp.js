@@ -7,9 +7,9 @@
 
     config = $.extend({
       defaultView  : $("main#spapp > section:last-child").attr("id"),
-      templateDir  : "./views/",
+      templateDir  : './views/',
       pageNotFound : false
-    }, options );
+    }, options ); 
 
     $("main#spapp > section").each(function(k, e) {
       var elm = $(this);
