@@ -1,8 +1,11 @@
 const ProfileService = {
   init: function () {
-    let id = localStorage.getItem("user_id");
-    this.loadUserData(id);
-    this.loadAnimals(id);
+    if (Utils.get_from_localstorage("user") == null) {
+      window.location = "#login";
+    }
+    let user = Utils.get_from_localstorage("user");
+    this.loadUserData(user.id);
+    this.loadAnimals(user.id);
 
     this.validate();
   },
@@ -16,7 +19,7 @@ const ProfileService = {
   },
 
   loadAnimals: function (id) {
-    RestClient.get("animals/json/json", function (data) {
+    RestClient.get("animals/all", function (data) {
       let $animalCardsRow = $("#animal-cards-row");
       data.forEach(function (animal) {
         if (animal.user_id == id) {
@@ -29,7 +32,7 @@ const ProfileService = {
   createCard: function (animal) {
     let badgeColor = animal.gender === "male" ? "bg-blue" : "bg-pink";
     let imagePath =
-      animal.image_path != null
+      animal.image_path != 0
         ? animal.image_path
         : "https://dummyimage.com/450x300/dee2e6/6c757d.jpg";
     let cardHtml = `
@@ -120,21 +123,19 @@ const ProfileService = {
       function (data) {
         Utils.block_ui("#add_listing_modal");
 
-        data["user_id"] = localStorage.getItem("user_id");
+        let user = Utils.get_from_localstorage("user");
+        data["user_id"] = user.id;
 
         //url, data, callback, error_callback
         RestClient.post(
           "animals/add",
           data,
           function (response) {
-            console.log("tu sam");
             Utils.unblock_ui("#add_listing_modal");
             $("#add_listing_modal").modal("toggle");
             AdminService.reload_animals_datatable();
           },
           function (error) {
-            console.log(error);
-
             toastr.error("Error creating the listing");
             Utils.unblock_ui("#add_listing_modal");
           }

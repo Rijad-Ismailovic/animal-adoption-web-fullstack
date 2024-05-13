@@ -8,19 +8,6 @@ class AnimalDao extends BaseDao {
         parent::__construct("animals");
     }
     public function add_animal($animal){
-        echo "<pre>";
-            foreach ($animal as $key => $value) {
-        echo "{$key}: " . gettype($value) . " - " . var_export($value, true) . "\n";
-        }
-        echo "</pre>";
-
-        /* $query = "INSERT INTO animals (user_id, listing_title, name, type, breed, location, age, weight, vaccinated, chipped, additional_info, gender, image_path)
-                  VALUES(:user_id, :listing_title, :name, :type, :breed, :location, :age, :weight, :vaccinated, :chipped, :additional_info, :gender, :image_path)"; 
-        $statement = $this -> connection -> prepare($query);
-        $statement -> execute ($animal);
-        $animal["id"] = $this -> connection -> lastInsertId(); 
-        return $animal; */
-
         return $this -> insert("animals", $animal);
     }
 
@@ -82,6 +69,6 @@ class AnimalDao extends BaseDao {
 
     public function get_animals(){
         $query = "SELECT * FROM animals";
-        return $this->query1($query); 
+        return $this->query($query, []); 
     }
 }

@@ -18,14 +18,14 @@ class AnimalService {
         if(isset($animal["vaccinated"])){
             $animal['vaccinated'] = ($animal['vaccinated'] === 'on') ? 1 : 0;
         } else{
-            $animal['vaccinated'] = null; 
+            $animal['vaccinated'] = 0; 
         }
         if(isset($animal["chipped"])){
             $animal['chipped'] = ($animal['chipped'] === 'on') ? 1 : 0;
         } else{
-            $animal['chipped'] = null;
+            $animal['chipped'] = 0;
         }
-        $animal["image_path"] = null;
+        $animal["image_path"] = 0;
 
         return $this->animal_dao->add_animal($animal); 
     }
@@ -49,9 +49,25 @@ class AnimalService {
     }
 
     public function edit_animal($animal){
+        $animal['user_id'] = intval($animal['user_id']);
+        $animal["name"] = ($animal["name"] != "") ? $animal["name"] : null;
+        $animal["breed"] = ($animal["breed"] != "") ? $animal["breed"] : null;
+        $animal["age"] = ($animal["age"] != "") ? intval($animal['age']) : null;
+        $animal["weight"] = ($animal["weight"] != "") ? intval($animal['weight']) : null;
+        if(isset($animal["vaccinated"])){
+            $animal['vaccinated'] = ($animal['vaccinated'] === 'on') ? 1 : 0;
+        } else{
+            $animal['vaccinated'] = 0; 
+        }
+        if(isset($animal["chipped"])){
+            $animal['chipped'] = ($animal['chipped'] === 'on') ? 1 : 0;
+        } else{
+            $animal['chipped'] = 0;
+        }
+        $animal["image_path"] = null;
+
         $id = $animal["id"];
         unset($animal["id"]);
-        echo $id;
         
         $this->animal_dao->edit_animal($id, $animal);
     }

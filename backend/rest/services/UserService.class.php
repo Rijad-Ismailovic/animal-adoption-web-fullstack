@@ -10,6 +10,7 @@ class userService {
 
     // users
     public function add_user($user){
+        $user["password"] = password_hash($user["password"], PASSWORD_BCRYPT);
         return $this->user_dao->add_user($user); 
     }
 
@@ -34,7 +35,6 @@ class userService {
     public function edit_user($user){
         $id = $user["users_pk"];
         unset($user["users_pk"]);
-        echo $id;
         
         $this->user_dao->edit_user($id, $user);
     }
@@ -49,5 +49,9 @@ class userService {
 
     public function get_users_json(){
         return $this->user_dao->get_users_json();
+    }
+
+    public function get_users(){
+        return $this->user_dao->get_users();
     }
 }

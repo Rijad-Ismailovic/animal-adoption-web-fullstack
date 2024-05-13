@@ -190,7 +190,8 @@ var AdminService = {
       function (data) {
         Utils.block_ui("#edit_listing_modal");
 
-        data["user_id"] = localStorage.getItem("user_id");
+        let user = Utils.get_from_localstorage("user");
+        data["user_id"] = user.id;
 
         //url, data, callback, error_callback
         RestClient.post(

@@ -11,3 +11,7 @@ define("DB_PORT", "3306");
 define("DB_USER", "root");
 define("DB_PASSWORD", "");
 define("DB_HOST", "localhost"); //127.0.0.1
+
+
+// JWT Secret
+define("JWT_SECRET", "@=p:f;C6)ppx[E659H75MeFDbn]-c9");

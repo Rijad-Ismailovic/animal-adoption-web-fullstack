@@ -8,8 +8,7 @@ const HomepageService = {
   },
 
   loadAnimals: function () {
-    RestClient.get("animals/json/json", function (data) {
-      console.log("Data je " + data);
+    RestClient.get("animals/all", function (data) {
       let $animalCardsRow = $("#animal-cards-row");
       data.forEach(function (animal) {
         HomepageService.createCard(animal).appendTo($animalCardsRow);
@@ -21,7 +20,7 @@ const HomepageService = {
 
   createCard: function (animal) {
     let imagePath =
-      animal.image_path != null
+      animal.image_path != "0"
         ? animal.image_path
         : "https://dummyimage.com/450x300/dee2e6/6c757d.jpg"; 
     let badgeColor = animal.gender === "male" ? "bg-blue" : "bg-pink";

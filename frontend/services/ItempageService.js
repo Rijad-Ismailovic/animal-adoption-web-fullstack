@@ -10,7 +10,7 @@ const ItempageService = {
   loadAnimalData: function (id) {
     RestClient.get("animals/id/" + id, function (animal) {
       let imagePath =
-        animal.image_path != null
+        animal.image_path != "0"
           ? animal.image_path
           : "https://dummyimage.com/600x700/dee2e6/6c757d.jpg"; 
       
@@ -31,7 +31,7 @@ const ItempageService = {
   },
 
   loadSimillarArticles: function (activeAnimal) {
-    RestClient.get("animals/json/json", function (data) {
+    RestClient.get("animals/all", function (data) {
       let $animalCardsRow = $("#animal-cards-row");
       let $simillarArticlesRow = $("#simillar_articles_row");
       let count = 0; // Counter for similar articles
@@ -46,12 +46,15 @@ const ItempageService = {
   },
 
   createCard: function (animal) {
-    console.log("creating animal");
+    let imagePath =
+      animal.image_path != "0"
+        ? animal.image_path
+        : "https://dummyimage.com/450x300/dee2e6/6c757d.jpg"; 
     let badgeColor = animal.gender === "male" ? "bg-blue" : "bg-pink";
     let cardHtml = `
       <div class="col mb-5">
         <div class="card h-100">
-          <img class="card-img-top" src="${animal.image_path}" alt="..." />
+          <img class="card-img-top" src="${imagePath}" alt="..." />
           <div class="card-body p-3 position-relative">
             <div class="badge badge-pill ${badgeColor} position-absolute" style="top: 0.6rem; right: 0.6rem">‎ ‎ </div>
             <div class="text-center">

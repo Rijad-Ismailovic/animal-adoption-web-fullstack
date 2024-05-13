@@ -8,19 +8,6 @@ class UserDao extends BaseDao {
         parent::__construct("users");
     }
     public function add_user($user){
-        echo "<pre>";
-            foreach ($user as $key => $value) {
-        echo "{$key}: " . gettype($value) . " - " . var_export($value, true) . "\n";
-        }
-        echo "</pre>";
-
-        /* $query = "INSERT INTO users (user_id, listing_title, name, type, breed, location, age, weight, vaccinated, chipped, additional_info, gender, image_path)
-                  VALUES(:user_id, :listing_title, :name, :type, :breed, :location, :age, :weight, :vaccinated, :chipped, :additional_info, :gender, :image_path)"; 
-        $statement = $this -> connection -> prepare($query);
-        $statement -> execute ($user);
-        $user["id"] = $this -> connection -> lastInsertId(); 
-        return $user; */
-
         return $this -> insert("users", $user);
     }
 
@@ -45,9 +32,6 @@ class UserDao extends BaseDao {
     }
 
     public function delete_user_by_id($id){
-
-        echo($id);
-
         $query = "DELETE FROM animals WHERE user_id = :user_id";
         $this->execute($query, [
             ":user_id" => $id
@@ -104,5 +88,10 @@ class UserDao extends BaseDao {
     public function get_users_json(){
         $query = "SELECT * FROM users";
         return $this->query($query, []); //da nije ovjde problem, trebam li nesto drugo uraditi?
+    }
+
+    public function get_users(){
+        $query = "SELECT * FROM users";
+        return $this->query($query, []); 
     }
 }

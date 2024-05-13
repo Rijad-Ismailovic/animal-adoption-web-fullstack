@@ -2,7 +2,7 @@ const RegistrationService = {
   init: function () {
     $("body").removeClass("bg-light").addClass("bg-dark");
     $("footer").hide();
-    $("nav").hide();
+    // $("nav").hide();
 
     this.validate();
   },

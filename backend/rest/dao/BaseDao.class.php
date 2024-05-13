@@ -29,12 +29,6 @@ class BaseDao {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    protected function query1($query) {
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     protected function query_unique($query, $params) {
         $results = $this->query($query, $params);
         return reset($results);
