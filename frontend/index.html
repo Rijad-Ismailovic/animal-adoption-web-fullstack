@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>udomi.ba</title>
+    <!-- Tab icon-->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets/media/misc/paw-solid.svg"
+    />
+
+    <link rel="stylesheet" href="assets/css/spapp.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/toastr.css" />
+    <link rel="stylesheet" href="assets/css/spinkit.css" />
+    <link rel="stylesheet" href="assets/css/datatables.min.css" />
+  </head>
+
+  <body class>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#homepage"><b>udomi.ba</b></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#homepage">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#admin">Admin</a>
+            </li>
+          </ul>
+          <a id="login_button" href="#login" class="btn btn-outline-light">
+            <i class="me-1"></i>
+            Log in
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="spapp" role="main">
+      <section id="error_404"><h1>Page not found</h1></section>
+      <section id="itempage" data-load="itempage.html"></section>
+      <section id="profile" data-load="profile.html"></section>
+      <section id="login" data-load="login.html"></section>
+      <section id="registration" data-load="registration.html"></section>
+      <section id="admin" data-load="admin.html"></section>
+      <section id="homepage" data-load="homepage.html"></section>
+    </main>
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; udomi.ba</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/libraries/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/libraries/jquery-3.7.1-latest.js"></script>
+    <script src="assets/js/libraries/jquery.spapp.min.js"></script>
+    <script src="assets/js/libraries/jquery.spapp.js"></script>
+    <script src="assets/js/libraries/jquery.validate.min.js"></script>
+    <script src="assets/js/libraries/custom.js"></script>
+    <script src="assets/js/libraries/toastr.min.js"></script>
+    <script src="assets/js/libraries/block-ui.js"></script>
+    <script src="assets/js/libraries/dataTables.js"></script>
+    <script src="assets/js/libraries/dataTables.bootstrap5.js"></script>
+    <scirpt src="assets/js/libraries/jquery.easing.min.js"></scirpt>
+    <scirpt src="assets/js/libraries/sb-admin-2.min.js"></scirpt>
+
+    <script src="utils/constants.js"></script>
+    <script src="utils/form_validation.js"></script>
+    <script src="utils/rest_client.js"></script>
+    <script src="utils/utils.js"></script>
+  </body>
+</html>
+
+<script src="./services/IndexService.js"></script>
+<script>
+  IndexService.init();
+</script>

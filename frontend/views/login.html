@@ -1,0 +1,61 @@
+<div class="container py-5 px-4 px-lg-5 my-1">
+  <div class="row align-items-center">
+    <div class="col-md-6 col-lg-5 d-flex justify-content-end">
+      <img src="assets/media/misc/logo.png" width="150" class="mr-5" />
+    </div>
+    <div class="col-md-6 col-lg-7 text-left text-white">
+      <h1 class="display-4 fw-bolder">udomi.ba</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-1">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+      <form id="login_form" method="POST">
+        <div class="card px-5 py-4" id="form1">
+          <h2 class="mb-4 text-center text-black">Login</h2>
+          <div class="form-data">
+            <div class="forms-inputs mb-4">
+              <span>Email</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Password</span>
+              <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+              />
+            </div>
+            <div class="mb-3">
+              <button
+                type="submit"
+                class="btn btn-dark w-100"
+                form="login_form"
+              >
+                Login
+              </button>
+            </div>
+            <div class="text-center">
+              <a class="small" href="#registration">Register</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="./services/LoginService.js"></script>
+<script>
+  LoginService.init();
+</script>
