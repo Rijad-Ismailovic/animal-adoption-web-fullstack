@@ -8,44 +8,38 @@ use Firebase\JWT\Key;
 Flight::set("animal_service", new AnimalService());
 
 Flight::group("/animals", function(){
-    Flight::route("GET /paginated", function(){
-         try {
-            $token = Flight::request()->getHeader("Authentication");
-            if(!$token)
-                Flight::halt(401, "Missing authentication header");
+    /**
+     * @OA\Get(
+     *      path="/animals/all",
+     *      tags={"animals"},
+     *      summary="Get all users",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Array of all users in the databases"
+     *      )
+     * )
+     */
+    Flight::route("GET /all", function(){
+        $data = Flight::get("animal_service")->get_animals();
 
-            JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
-        } catch (\Exception $e) {
-            Flight::halt(401, $e->getMessage());
-        }
+        Flight::json($data);
+    });
 
-        $payload = Flight::request()->query;
+    /**
+     * @OA\Get(
+     *      path="/animals/all/profile",
+     *      tags={"animals"},
+     *      summary="Get all animals corresponding to the user",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Array of all users in the databases"
+     *      )
+     * )
+     */
+    Flight::route("GET /all_profile", function(){
+        $data = Flight::get("animal_service")->get_animals();
 
-        $params = [
-            "start" => (int)$payload["start"],
-            "search" => $payload["search"]["value"],
-            "draw" => $payload["draw"],
-            "limit" => (int)$payload["length"],
-            "order_column" => $payload["order"][0]["name"],
-            "order_direction" => $payload["order"][0]["dir"] ,
-        ];
-
-        $data = Flight::get("animal_service")->get_animals_paginated($params["start"], $params["limit"], $params["search"], $params["order_column"], $params["order_direction"]);
-
-        foreach($data["data"] as $id => $animal){
-            $data["data"][$id]["action"] = '<div class="btn-group" role="group" aria-label="Actions">' .
-                                                '<button type="button" class="btn btn-warning" onClick = "AdminService.open_edit_animal_modal('. $animal["id"] .')">Edit</button>' .
-                                                '<button type="button" class="btn btn-danger" onClick = "AdminService.delete_animal('. $animal["id"] .')">Delete</button>' .
-                                            '</div>';
-        }
-
-        Flight::json([
-            "draw" => $params["draw"],
-            "data" => $data["data"],
-            "recordsFiltered" => $data["count"],
-            "recordTotal" => $data["count"],
-            "end" => $data["count"],
-        ]); 
+        Flight::json($data);
     });
 
     /**
@@ -78,17 +72,7 @@ Flight::group("/animals", function(){
      *      )
      * )
      */ 
-    Flight::route("POST /add", function(){
-        try {
-            $token = Flight::request()->getHeader("Authentication");
-            if(!$token)
-                Flight::halt(401, "Missing authentication header");
-
-            JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
-        } catch (\Exception $e) {
-            Flight::halt(401, $e->getMessage());
-        }
-        
+    Flight::route("POST /add", function(){ 
         $payload = Flight::request()->data->getData();
     
         if($payload["id"] != null && $payload["id"] != ""){
@@ -99,6 +83,36 @@ Flight::group("/animals", function(){
         }
 
         Flight::json(["message" => "You have succesfully added the patient", "data" => $animal]);
+    });
+    
+    Flight::route("GET /paginated", function(){
+        $payload = Flight::request()->query;
+
+        $params = [
+            "start" => (int)$payload["start"],
+            "search" => $payload["search"]["value"],
+            "draw" => $payload["draw"],
+            "limit" => (int)$payload["length"],
+            "order_column" => $payload["order"][0]["name"],
+            "order_direction" => $payload["order"][0]["dir"] ,
+        ];
+
+        $data = Flight::get("animal_service")->get_animals_paginated($params["start"], $params["limit"], $params["search"], $params["order_column"], $params["order_direction"]);
+
+        foreach($data["data"] as $id => $animal){
+            $data["data"][$id]["action"] = '<div class="btn-group" role="group" aria-label="Actions">' .
+                                                '<button type="button" class="btn btn-warning" onClick = "AdminService.open_edit_animal_modal('. $animal["id"] .')">Edit</button>' .
+                                                '<button type="button" class="btn btn-danger" onClick = "AdminService.delete_animal('. $animal["id"] .')">Delete</button>' .
+                                            '</div>';
+        }
+
+        Flight::json([
+            "draw" => $params["draw"],
+            "data" => $data["data"],
+            "recordsFiltered" => $data["count"],
+            "recordTotal" => $data["count"],
+            "end" => $data["count"],
+        ]); 
     });
 
     /**
@@ -113,7 +127,7 @@ Flight::group("/animals", function(){
      *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="animal_id", example="1", description="Animal ID")
      * )
      */
-    Flight::route("DELETE /delete/@animal_id", function($animal_id){;
+    Flight::route("DELETE /delete/@animal_id", function($animal_id){
         if($animal_id == NULL || $animal_id == ""){
             Flight::halt(500, "You have to provide a valid animal id");
         }
@@ -134,28 +148,11 @@ Flight::group("/animals", function(){
      *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="animal_id", example="1", description="Animal ID")
      * )
      */
-    Flight::route("GET /id/@animal_id", function($animal_id){
+    Flight::route("GET /id/@animal_id", function($animal_id){ //rijade omiatj ovaj jer ovo se moze vidjeti i kad nisi log in-an
         $animal = Flight::get("animal_service")->get_animal_by_id($animal_id);
 
         Flight::json($animal);
     }); 
-
-    /**
-     * @OA\Get(
-     *      path="/animals/all",
-     *      tags={"animals"},
-     *      summary="Get all patients",
-     *      @OA\Response(
-     *           response=200,
-     *           description="Array of all patients in the databases"
-     *      )
-     * )
-     */
-    Flight::route("GET /all", function(){
-        $data = Flight::get("animal_service")->get_animals();
-
-        Flight::json($data);
-    });
 
     /**
      * @OA\Get(

@@ -73,6 +73,7 @@ const RegistrationService = {
           function (response) {
             toastr.success("Succesfully registered!");
             Utils.unblock_ui("#registration_form");
+            window.location.hash = "#login";
           },
           function (error) {
             toastr.error("Couldnt register user");

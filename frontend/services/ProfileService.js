@@ -4,8 +4,10 @@ const ProfileService = {
       window.location = "#login";
     }
     let user = Utils.get_from_localstorage("user");
-    this.loadUserData(user.id);
-    this.loadAnimals(user.id);
+    if (user) {
+      this.loadUserData(user.id);
+      this.loadAnimals(user.id);
+    }
 
     this.validate();
   },
@@ -19,7 +21,7 @@ const ProfileService = {
   },
 
   loadAnimals: function (id) {
-    RestClient.get("animals/all", function (data) {
+    RestClient.get("animals/all_profile", function (data) {
       let $animalCardsRow = $("#animal-cards-row");
       data.forEach(function (animal) {
         if (animal.user_id == id) {

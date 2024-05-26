@@ -10,6 +10,7 @@ const HomepageService = {
   loadAnimals: function () {
     RestClient.get("animals/all", function (data) {
       let $animalCardsRow = $("#animal-cards-row");
+      console.log(data);
       data.forEach(function (animal) {
         HomepageService.createCard(animal).appendTo($animalCardsRow);
       });
