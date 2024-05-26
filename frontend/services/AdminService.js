@@ -3,7 +3,7 @@ var AdminService = {
   reload_animals_datatable: function () {
     Utils.get_datatable(
       "tbl_animals",
-      Constants.API_BASE_URL + "animals/paginated",
+      Constants.get_api_base_url() + "animals/paginated",
       [
         { data: "action" },
         { data: "id" },
@@ -75,7 +75,7 @@ var AdminService = {
   reload_users_datatable: function () {
     Utils.get_datatable(
       "tbl_users",
-      Constants.API_BASE_URL + "users/paginated",
+      Constants.get_api_base_url() + "users/paginated",
       [
         { data: "action" },
         { data: "id" },
