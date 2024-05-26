@@ -21,7 +21,7 @@ $(document).ready(function () {
     onReady: function () {
       $("body").removeClass("bg-dark").addClass("bg-light");
       $("footer").show();
-      $("#login_button").text("Log out");
+      $("#login_button").text("Log out"); 
     },
   });
   app.route({

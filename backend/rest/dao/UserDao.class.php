@@ -87,7 +87,7 @@ class UserDao extends BaseDao {
 
     public function get_users_json(){
         $query = "SELECT * FROM users";
-        return $this->query($query, []); //da nije ovjde problem, trebam li nesto drugo uraditi?
+        return $this->query($query, []);
     }
 
     public function get_users(){
