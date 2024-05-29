@@ -7,3 +7,5 @@ require __DIR__."/rest/routes/user_routes.php";
 require __DIR__."/rest/routes/auth_routes.php";
 
 Flight::start();
+
+echo "rikjad";
