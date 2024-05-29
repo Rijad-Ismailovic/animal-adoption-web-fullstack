@@ -1,0 +1,90 @@
+<section class="py-">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-md-6">
+        <img class="card-img-top mb-5 mb-md-0" src="" alt="..." id="image" />
+      </div>
+
+      <div class="col-md-6">
+        <div class="small" id="username">username</div>
+        <h1 class="display-5 fw-bolder" id="listing_name">listing_name</h1>
+
+        <hr class="hr" />
+
+        <div class="lead">
+          <b>Ime:</b> <span id="name"></span><br />
+          <b>Pasmina:</b> <span id="breed"></span><br />
+          <b>Starost:</b> <span id="age"></span><br />
+          <b>Tezina:</b> <span id="weight"></span><br />
+          <b>Lokacija:</b> <span id="location"></span><br />
+          <b>Vakcinisan:</b> <span id="vaccinated"></span><br />
+          <b>Cipovan:</b> <span id="chipped"></span>
+        </div>
+
+        <hr class="hr" />
+
+        <p class="lead" id="additional_info"></p>
+        <div class="d-flex">
+          <!-- <div class="col">
+            <a
+              class="btn btn-outline-dark w-100"
+              role="button"
+              data-bs-toggle="modal"
+              data-bs-target="#udomi_modal"
+            >
+              <i class="bi-house-fill me-1"></i>
+              <b>UDOMI</b>
+            </a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hr" />
+</section>
+
+<!-- Slicni oglasi-->
+<section class="bg-light">
+  <div class="container px-4 px-lg-5 mt-5">
+    <h2 class="fw-bolder mb-4">Slicni oglasi</h2>
+    <div
+      id="simillar_articles_row"
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+    ></div>
+  </div>
+</section>
+
+<!-- Udomi Modal -->
+<div
+  class="modal fade"
+  id="udomi_modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Potvrda</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">Da li ste sigurni da želite udomiti?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Udomi!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./services/ItempageService.js"></script>
+<script>
+  ItempageService.init();
+</script>

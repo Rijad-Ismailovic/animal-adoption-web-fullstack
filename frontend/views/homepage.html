@@ -1,0 +1,30 @@
+<!-- Header-->
+<header class="bg-primary py-4">
+  <div class="container px-4 px-lg-5 my-1">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-lg-5 d-flex justify-content-end">
+        <img src="assets/media/misc/logo.png" width="150" class="mr-5" />
+      </div>
+      <div class="col-md-6 col-lg-7 text-left text-white">
+        <h1 class="display-4 fw-bolder">udomi.ba</h1>
+        <p class="lead fw-normal text-white-50 mb-0 ms-4">
+          Jer svi zaslužuju dom
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Section-->
+<section class="py-4">
+  <div id="animal-cards-container" class="container px-4 px-lg-5 mt-5">
+    <div
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+      id="animal-cards-row"
+    ></div>
+  </div>
+</section>
+
+<script src="./services/HomepageService.js"></script>
+<script>
+  HomepageService.init();
+</script>

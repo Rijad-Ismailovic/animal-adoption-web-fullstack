@@ -1,0 +1,99 @@
+<div class="container py-4 px-4 px-lg-5 my-1 text-center">
+  <!-- Added 'text-center' class here -->
+  <div class="row align-items-center">
+    <div class="col-md-12 col-lg-12 text-white">
+      <h1 class="display-4 fw-bolder">udomi.ba</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-5">
+      <form id="registration_form" method="POST">
+        <div class="card px-5 py-4" id="form1">
+          <h2 class="mb-4 text-center text-black">Registration</h2>
+          <div class="form-data">
+            <div class="forms-inputs mb-4">
+              <span>Username</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Email</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Name</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Surname</span>
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="surname"
+                name="surname"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Password</span>
+              <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+              />
+            </div>
+            <div class="forms-inputs mb-4">
+              <span>Repeat password</span>
+              <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
+                id="repeat_password"
+                name="repeat_password"
+              />
+            </div>
+            <div class="mb-3">
+              <button
+                type="submit"
+                class="btn btn-dark w-100"
+                form="registration_form"
+              >
+                Register
+              </button>
+            </div>
+            <div class="text-center">
+              <a class="small" href="#login">Login</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="./services/RegistrationService.js"></script>
+<script>
+  RegistrationService.init();
+</script>
